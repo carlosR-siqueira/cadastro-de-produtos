@@ -12,7 +12,8 @@ export async function GET(request: NextRequest, { params }: { params: { categori
       
   
       if (data) {
-        return NextResponse.json(data);
+        
+        return NextResponse.json(data)
       } else {
         return NextResponse.json({ message: 'Nenhum produto encontrado' }, { status: 404 });
       }

@@ -9,10 +9,6 @@ export async function PUT(request: NextRequest, { params }: { params: { categori
   const { categoria, id } = params
   
 
-  if (!nome || !descricao || !preco || !categoria) {
-    return NextResponse.json({ message: 'Todos os campos são obrigatórios' }, { status: 400 });
-  }
-
   try {
     const dbRef = ref(database, `produto/${categoria}/${id}`);
     
@@ -25,9 +21,9 @@ export async function PUT(request: NextRequest, { params }: { params: { categori
     
     await update(dbRef , updateData);
 
-    return NextResponse.json({ message: 'Produto criado com sucesso!' }, { status: 201 });
+    return NextResponse.json({ message: 'Produto atualizado com sucesso!' }, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ message: 'Erro ao inserir o produto',error: (error as Error).message }, { status: 500 });
+    return NextResponse.json({ message: 'Erro ao atualizar o produto',error: (error as Error).message }, { status: 500 });
   }
 }
 
