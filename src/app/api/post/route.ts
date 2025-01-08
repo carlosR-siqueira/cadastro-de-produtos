@@ -4,15 +4,15 @@ import { database } from '@lib/firebaseConfig'; // Ajuste o caminho conforme nec
 import { ref, push } from 'firebase/database';
 
 export async function POST(request: NextRequest) {
-  const { nome, descricao, preco, categoria } = await request.json();
+  const { name, category, subcategory, description, imgUrl1, imgUrl2, imgUrl3  } = await request.json();
   
-  if (!nome || !descricao || !preco || !categoria) {
+  if (!name || !category || !subcategory || !description || !imgUrl1 || !imgUrl2 || !imgUrl3 ) {
     return NextResponse.json({ message: 'Todos os campos são obrigatórios' }, { status: 400 });
   }
 
   try {
-    const dbRef = ref(database, `produto/${categoria}`);
-    await push(dbRef, {nome, descricao, preco, categoria});
+    const dbRef = ref(database, `produto/${category}`);
+    await push(dbRef, {name, category, subcategory, description, imgUrl1, imgUrl2, imgUrl3});
 
     return NextResponse.json({ message: 'Produto criado com sucesso!' }, { status: 201 });
   } catch (error) {
